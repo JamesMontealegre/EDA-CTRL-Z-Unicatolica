@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <title>App Tabla Vanilla JS</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body class="bg-gray-100 min-h-screen flex items-center justify-center">
+    <div class="bg-white p-8 rounded shadow-md w-full max-w-lg">
+      <h1 class="text-2xl font-bold mb-6 text-center">Agregar a la tabla</h1>
+
+      <div class="flex flex-col gap-4 mb-6">
+        <input
+          id="indexInput"
+          type="text"
+          placeholder="Telefóno"
+          class="border rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
+        />
+        <input
+          id="valueInput"
+          type="text"
+          placeholder="Contenido"
+          class="border rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
+        />
+        <button
+          id="addBtn"
+          class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition"
+        >
+          Agregar
+        </button>
+      </div>
+
+      <table class="w-full text-left border border-gray-300">
+        <thead class="bg-gray-200">
+          <tr>
+            <th class="py-2 px-4 border-b">Telefóno</th>
+            <th class="py-2 px-4 border-b">Contenido</th>
+          </tr>
+        </thead>
+        <tbody id="tableBody">
+          <!-- Aquí se agregan los elementos -->
+        </tbody>
+      </table>
+    </div>
+
+    <script>
+      const indexInput = document.getElementById("indexInput");
+      const valueInput = document.getElementById("valueInput");
+      const addBtn = document.getElementById("addBtn");
+      const tableBody = document.getElementById("tableBody");
+
+      addBtn.addEventListener("click", () => {
+        const index = indexInput.value.trim();
+        const value = valueInput.value.trim();
+
+        if (index === "" || value === "") {
+          alert("Por favor completa ambos campos.");
+          return;
+        }
+
+        const row = document.createElement("tr");
+        row.innerHTML = `
+        <td class="py-2 px-4 border-b">${index}</td>
+        <td class="py-2 px-4 border-b">${value}</td>
+      `;
+
+        tableBody.appendChild(row);
+
+        indexInput.value = "";
+        valueInput.value = "";
+        indexInput.focus();
+      });
+    </script>
+  </body>
+</html>
