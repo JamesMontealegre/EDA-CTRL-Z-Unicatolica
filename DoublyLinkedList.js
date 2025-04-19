@@ -1,11 +1,14 @@
-import { DoublyLinkedListNode } from './DoublyLinkedListNode.js';
-
 class DoublyLinkedList {
   constructor() {
-    this.head = null;
-    this.tail = null;
+    this.head = null; // El primer nodo
+    this.tail = null; // El último nodo
+    this.size = 0;    // Cuántos nodos hay
   }
-}
 
-//Aqui ira un metodo para agregar la cola y la cabeza a los objetos 
-//de listNode luego.
+  isEmpty() {
+    return this.size === 0; // Ver si la lista está vacía
+  }
+
+  //Metodos aqui
+
+}
