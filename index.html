@@ -2,74 +2,101 @@
 <html lang="es">
   <head>
     <meta charset="UTF-8" />
-    <title>App Tabla Vanilla JS</title>
+    <title>Agenda con Lista Doblemente Enlazada</title>
     <script src="https://cdn.tailwindcss.com"></script>
   </head>
   <body class="bg-gray-100 min-h-screen flex items-center justify-center">
-    <div class="bg-white p-8 rounded shadow-md w-full max-w-lg">
-      <h1 class="text-2xl font-bold mb-6 text-center">Agregar a la tabla</h1>
+    <div class="bg-white p-8 rounded shadow-md w-full max-w-2xl">
+      <h1 class="text-2xl font-bold mb-6 text-center">Agenda de Contactos</h1>
 
-      <div class="flex flex-col gap-4 mb-6">
-        <input
-          id="indexInput"
-          type="text"
-          placeholder="Telefóno"
-          class="border rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
-        />
-        <input
-          id="valueInput"
-          type="text"
-          placeholder="Contenido"
-          class="border rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
-        />
-        <button
-          id="addBtn"
-          class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition"
-        >
-          Agregar
-        </button>
+      <!-- Formulario para agregar contactos -->
+      <div class="mb-6 p-4 border rounded border-gray-300">
+        <h2 class="text-xl font-semibold mb-3 text-center">Agregar Contacto</h2>
+        <div class="flex flex-col gap-3">
+          <input
+            id="firstNameInput"
+            type="text"
+            placeholder="Nombre"
+            class="border rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
+          />
+          <input
+            id="lastNameInput"
+            type="text"
+            placeholder="Apellido"
+            class="border rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
+          />
+          <button
+            id="addBtn"
+            class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition"
+          >
+            Agregar Contacto (Ordenado por Nombre)
+          </button>
+        </div>
       </div>
 
-      <table class="w-full text-left border border-gray-300">
+      <!-- Formulario para buscar contactos -->
+      <div class="mb-6 p-4 border rounded border-gray-300">
+        <h2 class="text-xl font-semibold mb-3 text-center">Buscar Contacto</h2>
+        <div class="flex flex-col gap-3">
+          <input
+            id="searchInput"
+            type="text"
+            maxlength="1"
+            placeholder="Buscar por letra inicial (Nombre o Apellido)"
+            class="border rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-green-400"
+          />
+          <button
+            id="searchBtn"
+            class="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600 transition"
+          >
+            Buscar
+          </button>
+          <div id="searchResults" class="mt-2 text-sm text-gray-700"></div>
+        </div>
+      </div>
+
+      <!-- Formulario para eliminar contactos -->
+      <div class="mb-6 p-4 border rounded border-gray-300">
+        <h2 class="text-xl font-semibold mb-3 text-center">Eliminar Contactos</h2>
+        <div class="flex flex-col gap-3">
+          <input
+            id="deleteInput"
+            type="text"
+            maxlength="1"
+            placeholder="Eliminar por letra inicial del Nombre"
+            class="border rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-red-400"
+          />
+          <button
+            id="deleteBtn"
+            class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 transition"
+          >
+            Eliminar
+          </button>
+          <div id="deleteResults" class="mt-2 text-sm text-gray-700"></div>
+        </div>
+      </div>
+
+      <!-- Tabla para mostrar los contactos -->
+      <h2 class="text-xl font-semibold mb-3 text-center">Lista de Contactos</h2>
+      <table class="w-full text-left border border-collapse border-gray-300">
         <thead class="bg-gray-200">
           <tr>
-            <th class="py-2 px-4 border-b">Telefóno</th>
-            <th class="py-2 px-4 border-b">Contenido</th>
+            <th class="py-2 px-4 border-b border-gray-300">Nombre</th>
+            <th class="py-2 px-4 border-b border-gray-300">Apellido</th>
           </tr>
         </thead>
         <tbody id="tableBody">
-          <!-- Aquí se agregan los elementos -->
+          <!-- Aquí se agregan los contactos dinámicamente -->
+          <tr>
+            <td colspan="2" class="text-center py-4 text-gray-500">La agenda está vacía.</td>
+          </tr>
         </tbody>
       </table>
     </div>
 
-    <script>
-      const indexInput = document.getElementById("indexInput");
-      const valueInput = document.getElementById("valueInput");
-      const addBtn = document.getElementById("addBtn");
-      const tableBody = document.getElementById("tableBody");
-
-      addBtn.addEventListener("click", () => {
-        const index = indexInput.value.trim();
-        const value = valueInput.value.trim();
-
-        if (index === "" || value === "") {
-          alert("Por favor completa ambos campos.");
-          return;
-        }
-
-        const row = document.createElement("tr");
-        row.innerHTML = `
-        <td class="py-2 px-4 border-b">${index}</td>
-        <td class="py-2 px-4 border-b">${value}</td>
-      `;
-
-        tableBody.appendChild(row);
-
-        indexInput.value = "";
-        valueInput.value = "";
-        indexInput.focus();
-      });
-    </script>
+    <!-- Scripts -->
+    <script src="DoublyLinkedListNode.js"></script>
+    <script src="DoublyLinkedList.js"></script>
+    <script src="conector.js"></script>
   </body>
 </html>

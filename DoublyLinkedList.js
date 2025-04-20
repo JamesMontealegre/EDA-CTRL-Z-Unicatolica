@@ -71,4 +71,66 @@ class DoublyLinkedList {
     return foundNodes;
   }
 
+  deleteByFirstLetter(letter) {
+    let deletedCount = 0;
+    if (typeof letter !== 'string' || letter.length !== 1 || !this.head) {
+        console.warn("Toca meter una sola letra y que la lista no esté vacía.");
+      return deletedCount;
+    }
+
+    let currentNode = this.head;
+    const letterLower = letter.toLowerCase();
+
+    while (currentNode !== null) {
+        const nextNode = currentNode.next;
+        const firstInitial = currentNode.firstName[0]?.toLowerCase();
+
+        if (firstInitial === letterLower) {
+            const nodeToDelete = currentNode;
+
+            if (nodeToDelete === this.head && nodeToDelete === this.tail) {
+                // Si es el único nodo
+                this.head = null;
+                this.tail = null;
+            } else if (nodeToDelete === this.head) {
+                // Si es el primero
+                this.head = nodeToDelete.next;
+                if (this.head) {
+                    this.head.previous = null;
+                } else {
+                    this.tail = null;
+                }
+            } else if (nodeToDelete === this.tail) {
+                // Si es el último
+                this.tail = nodeToDelete.previous;
+                this.tail.next = null;
+            } else {
+                // Si está en el medio
+                nodeToDelete.previous.next = nodeToDelete.next;
+                nodeToDelete.next.previous = nodeToDelete.previous;
+            }
+
+            nodeToDelete.next = null;
+            nodeToDelete.previous = null;
+
+            this.size--;
+            deletedCount++;
+        }
+        currentNode = nextNode;
+    }
+    return deletedCount;
+  }
+
+  getAllContacts() {
+    const contacts = [];
+    let currentNode = this.head;
+    while (currentNode !== null) {
+      contacts.push({
+        firstName: currentNode.firstName,
+        lastName: currentNode.lastName
+      });
+      currentNode = currentNode.next;
+    }
+    return contacts;
+  }
 }
