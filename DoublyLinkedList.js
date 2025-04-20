@@ -25,7 +25,7 @@ class DoublyLinkedList {
       newNode.next = this.head;
       this.head.previous = newNode;
       this.head = newNode;
-    } else {n
+    } else {
       // Si toca meterlo en el medio o al final
       let currentNode = this.head;
 
@@ -47,6 +47,28 @@ class DoublyLinkedList {
       }
     }
     this.size++; // Aumentar el tamaño
+  }
+
+  searchByFirstLetter(targetLetter) {
+    const foundNodes = [];
+    if (typeof targetLetter !== 'string' || targetLetter.length !== 1) {
+        console.warn("Toca meter una sola letra.");
+        return foundNodes;
+    }
+
+    let currentNode = this.head;
+    const targetLower = targetLetter.toLowerCase();
+
+    while (currentNode !== null) {
+      const firstInitial = currentNode.firstName[0]?.toLowerCase();
+      const lastInitial = currentNode.lastName[0]?.toLowerCase();
+
+      if (firstInitial === targetLower || lastInitial === targetLower) {
+        foundNodes.push(currentNode);
+      }
+      currentNode = currentNode.next;
+    }
+    return foundNodes;
   }
 
 }
